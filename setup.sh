@@ -26,4 +26,6 @@ echo "Using $PY ($("$PY" --version))"
 ./.venv/bin/pip install --quiet 'yt-dlp[default]' faster-whisper
 
 say "3/3  Checking everything"
-node scripts/doctor.mjs
+# The check exits non-zero when something is missing or the port is busy. The install itself
+# still succeeded, so report the check and leave acting on it to the reader.
+node scripts/doctor.mjs || true

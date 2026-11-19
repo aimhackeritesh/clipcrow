@@ -14,10 +14,10 @@ lists honestly what it does and does not do — read it before expecting an auto
 
 ## What you need
 
-| | | |
+| Tool | Needed for | Getting it |
 |---|---|---|
-| **Node.js 22+** | required | [nodejs.org](https://nodejs.org/) or `nvm install 22` |
-| **FFmpeg** | required | `brew install ffmpeg`, or `sudo apt install ffmpeg` |
+| **Node.js 22+** | everything | [nodejs.org](https://nodejs.org/) or `nvm install 22` |
+| **FFmpeg** | everything | `brew install ffmpeg`, or `sudo apt install ffmpeg` |
 | **Python 3.11+** | for YouTube links and captions | usually already installed |
 | **~2GB disk** | for the Python packages and clips | exports run about 9MB each |
 
