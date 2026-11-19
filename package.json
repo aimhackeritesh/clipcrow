@@ -1,0 +1,24 @@
+{
+  "name": "clipcrow",
+  "version": "0.1.0",
+  "description": "A local live-stream clipping desk: capture a YouTube Live stream, cut vertical Shorts with burned-in captions, and fill the YouTube Studio upload form.",
+  "license": "MIT",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "start": "node server.mjs",
+    "doctor": "node scripts/doctor.mjs",
+    "test": "node --test",
+    "verify": "node scripts/verify.mjs"
+  },
+  "dependencies": {
+    "sharp": "^0.34.0",
+    "hls.js": "^1.6.0"
+  },
+  "devDependencies": {
+    "playwright": "^1.56.0"
+  }
+}

@@ -1,0 +1,29 @@
+# Fly.io. The same image runs on Railway, Render or any box that can mount a disk:
+# what matters is a long-lived process and persistent storage, not the provider.
+app = "clipcrow"
+primary_region = "bom"
+
+[build]
+
+[env]
+  HOST = "0.0.0.0"
+  PORT = "8080"
+  DATA_DIR = "/data"
+
+[http_service]
+  internal_port = 8080
+  force_https = true
+  auto_start_machines = true
+  # A capture is a process that must keep running, so the machine must never be stopped under it.
+  auto_stop_machines = false
+  min_machines_running = 1
+
+[[mounts]]
+  source = "clipcrow_data"
+  destination = "/data"
+
+# Continuous H.264 transcoding plus CPU transcription. Below this the buffer falls behind the stream.
+[[vm]]
+  cpu_kind = "shared"
+  cpus = 2
+  memory = "4gb"

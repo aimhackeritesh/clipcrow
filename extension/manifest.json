@@ -1,0 +1,23 @@
+{
+  "manifest_version": 3,
+  "name": "Clipcrow Uploader",
+  "version": "0.1.0",
+  "description": "Stage a Clipcrow clip and fill the YouTube Studio upload form with its generated caption. You still press Publish.",
+  "permissions": ["storage"],
+  "host_permissions": [
+    "http://127.0.0.1:4317/*",
+    "https://studio.youtube.com/*"
+  ],
+  "action": {
+    "default_title": "Clipcrow Uploader",
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://studio.youtube.com/*"],
+      "js": ["content.js"],
+      "css": ["content.css"],
+      "run_at": "document_idle"
+    }
+  ]
+}

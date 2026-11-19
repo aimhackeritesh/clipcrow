@@ -1,0 +1,28 @@
+# Captures, exports, clip metadata and the OAuth token all live here.
+data/
+uploads/
+
+# Local toolchain
+node_modules/
+.venv/
+
+# Secrets — never commit these.
+youtube-credentials.json
+.env
+.env.*
+!.env.example
+
+# Build and run artefacts
+clipcrow-uploader-extension.zip
+playwright-report/
+test-results/
+.vercel/
+*.log
+
+# macOS
+.DS_Store
+
+# Frames grabbed from other people's videos while prototyping the presets. Kept locally,
+# never published: the UI ships the drawn *-preset.jpg diagrams instead.
+public/references/reaction.jpg
+public/references/cinematic.jpg

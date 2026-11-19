@@ -1,0 +1,17 @@
+import assert from 'node:assert/strict';
+import {chromium} from 'playwright';
+import {writeFile} from 'node:fs/promises';
+const base='http://127.0.0.1:4317';
+const post=async(p,b)=>{const r=await fetch(base+'/api/'+p,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(b)});const d=await r.json();assert.equal(r.status,200,JSON.stringify(d));return d;};
+const state=async()=>await(await fetch(base+'/api/state')).json();
+const wait=async f=>{for(let n=0;n<60;n++){const s=await state();if(f(s))return s;await new Promise(r=>setTimeout(r,1000));}throw new Error('Timed out');};
+await post('start',{reference:'cinematic',style:'cinematic',auto:true,threshold:-50,pre:4,post:2,hook:'THE NEXT CHAPTER'});
+const s=await wait(s=>s.clips.some(c=>c.session===s.session.id&&c.status==='ready'));
+const clip=s.clips.find(c=>c.session===s.session.id);assert.equal(clip.reason,'Audio peak');assert.ok(clip.duration>=2);
+await post('stop',{});await wait(s=>s.session.status==='stopped');
+const browser=await chromium.launch({channel:'chrome',headless:true,args:['--disable-gpu']});
+const page=await browser.newPage({viewport:{width:1440,height:1100}});const errors=[];page.on('pageerror',e=>errors.push(e.message));await page.goto(base);await page.waitForTimeout(1500);await page.screenshot({path:'data/verified-desktop.png',fullPage:true});
+await page.setViewportSize({width:375,height:900});await page.waitForTimeout(500);assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false);await page.screenshot({path:'data/verified-mobile.png'});
+await page.locator('#styles').scrollIntoViewIfNeeded();await page.screenshot({path:'data/verified-mobile-settings.png'});
+assert.deepEqual(errors,[]);await browser.close();
+await writeFile('data/verification.json',JSON.stringify({clip,errors,mobileOverflow:false},null,2));console.log(JSON.stringify({autoClip:clip.id,status:clip.status,duration:clip.duration,errors,mobileOverflow:false}));
