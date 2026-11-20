@@ -6,6 +6,11 @@ Shorts captions. It then writes a title, description and hashtags for each clip 
 listing and that clip's transcript, and a Chrome extension can type all of it into the YouTube Studio
 upload form for you.
 
+![The Clipcrow desk mid-capture: stream monitor, audio energy meter and the edit recipe](docs/desk.png)
+
+<sub>Captured against a synthetic test source generated with ffmpeg — the repo ships no real
+footage.</sub>
+
 Everything runs on your own machine. No account is needed to clip; nothing is uploaded unless you
 set up YouTube yourself, and no video or audio leaves the computer during capture or transcription.
 
@@ -151,6 +156,11 @@ Three things change once it is hosted:
 3. Enable automatic audio-peak clipping and Apply recipe, or click Clip this moment. A mark snapshots the current recipe. The clip waits for its ending, then enters a serial export queue.
 4. Preview and download the vertical MP4 from Your clip queue. Exported clips and their metadata survive a restart.
 5. Each finished clip carries a generated **YouTube caption**: open it on the clip card to read the title, description and hashtags before publishing. Press **Upload to YouTube** on a clip, or switch on **Auto-upload new clips** to send every finished clip. Visibility defaults to private.
+
+<img src="docs/clip.png" alt="A finished clip card: the vertical export with the hook burned in, its number, caption, MP4 download and upload button" width="320">
+
+Each finished clip arrives numbered, with the hook burned in, the MP4 and its `caption.txt` ready to
+download, and the generated title, description and hashtags behind the disclosure.
 
 The YouTube resolver uses yt-dlp and its JavaScript challenge support. Some videos require login, cookies, or platform changes; the current UI surfaces the resolver error and does not read browser cookies. Combined streams and separate video/audio HLS tracks are supported. Capture and MP4 export with audio were verified using the supplied YouTube Live link `gHYx_XYl0Tg`. This build does not yet implement reconnects or refresh expired media URLs.
 
